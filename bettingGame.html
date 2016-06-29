@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+	<title> Betting Game </title>
+</head>
+<body>
+	<h1>Betting Game</h1>
+	<p> In this game you get to guess a number between 1 and 10 and place a bet between $5 and $10. If you guess correctly, you will win the amount you bet. If you guess incorrectly you will lose the amount you bet. If you guess a number that if off by 1 your don't win or lose the bet (you get nothing and you lose nothing). You start with $100 in the bank and you can play until you run out of cash. </p>
+
+	<input type="button" value="Start The Game" id="MyButton" >
+
+
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		
+<script>
+  $(document).ready(function() {
+  	var player = {'bankroll': 100, 'currentBet': 0, 'currentGuess': 0};
+    var randomNum = 5;
+
+    $('#MyButton').click(function() {
+       // console.log("button")
+       // StartTheGame();
+       placeBet();
+       // console.log(player['currentBet']);
+       guessNum();
+       // console.log(player['currentGuess']);
+       checkGuess();
+
+    });
+
+    function placeBet() {
+    	// $5 or $10
+    	player.currentBet = prompt("Place a bet between $5 and $10");
+    	// validate 
+    	player.currentBet = parseInt(player.currentBet , 10);
+    }
+
+    function guessNum() {
+    	// between 1-10
+    	player.currentGuess = prompt("Guess a number between 1 and 10");
+    	player.currentGuess = parseInt(player.currentGuess , 10);
+    }
+
+    function checkGuess() {
+    	// not equal to
+    	// +/- 1//
+    	// equal to//
+    	if (player.currentGuess == randomNum) {
+    		player.bankroll += player.currentBet;
+    		alert("Nice guess! Your total points: " + player.bankroll);
+    	} else if (player.currentGuess == randomNum + 1 || 
+    		  			 player.currentGuess == randomNum - 1) {
+    			alert("So close... you should try again");
+    	} else {
+    			player.bankroll -= player.currentBet;
+    			if (player.bankroll <= 0) {
+    				alert("You're out of money");
+    				
+    		// 		player.currentBet = 0
+						// player.currentGuess = 0
+						// player.bankroll = 100
+
+    			} else {
+    				alert("You lost the bet. Your total points: " + player.bankroll);
+    			}
+    			
+    	} 
+    }
+	});
+	</script>
+
+</body>
+</html>
